@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+    {% if category %}
+        {{category.description|truncatewords:155}}
+    {% else %}
+        welcome to lavus store where you can by all items
+    {% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+    {{category.name}} - Lavus Store
+
+    {% else %}
+
+         See Our New Collections- Lavus Store
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% if category %}
+   <div>
+   <div class="row my_row_class">
+       <div class="mx-auto">
+       <p><a href="{% url 'shop:allProdCat' %}">our product collections</a></p>
+        </div>
+   </div>
+   </div>
+  {% endif %}
+  <div class="mx-auto">
+      {% if category %}
+        <img  class="center" src="{{category.image.url}}" alt="{{category.name}}" width="1120px;" height="450px;">
+  </div>
+          </br>
+
+<div>
+    <h1 class="text-center my_title">{{category.name}}</h1>
+    <p class="text-justify">{{category.description}}</p>
+</div>
+      {% else %}
+          <div>
+               <img  src="{% static 'img/banner.jpg' %}" alt="our products" width="1113px;" height="300px;">
+          </div>
+          </br>
+          <div>
+             <h1 class="text-center my_title">Our Product Collections</h1>
+             <p class="text-justify">Clothes today are made from a wide range of different materials. Traditional materials such as cotton, linen and leather are still sourced from plants and animals. But most clothes are more likely to be made of materials and chemicals derived from fossil fuel-based crude oil.
+
+There are nine major types of raw materials commonly used in clothing today.One of the oldest used fibres and the most important non-food crop in the world is cotton. Currently, cotton makes up around 24% of all fibre use globally – about 26.2 million tonnes – but its share of the market is declining due to competition from synthetic alternatives.An ancient, highly prized fabric, silk is mostly derived from the thread produced by the domesticated silkworm species Bombyx Mori. Around 0.11 million tonnes of silk were produced in 2020 (about 0.10% of total fibre)2 in more than 60 countries</p>
+          </div>
+{% endif %}
+
+<div class="container">
+    <div class="row mx-auto">
+        {% for product in products.object_list %}
+        <div class="my_bottom margin  col-9 col-sm-4 col-md-4 col-lg-4">
+            <div class="card text-center" style="min-width: 18rem;">
+                <a href="{{ product.get_url }}"><img class="card-img-top my_image" src="{{product.image.url}}" alt="{{product.name}}"></a>
+               <div class="card-body">
+                 <h4><b>{{product.name}}</b></h4>
+                 <p>{{product.price}}</p>
+               </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+   <div class="mx-auto">
+       {% if products.paginator.num_pages > 1 %}
+    <hr>
+       <div class="text-center">
+           {% for pg in products.paginator.page_range %}
+              <a href="?page={{ pg }}"  class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{ pg }}</a>
+           {% endfor %}
+       </div>
+        {% endif %}
+   </div>
+<br>
+</div>
+{% endblock %}
