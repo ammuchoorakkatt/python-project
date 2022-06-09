@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+<style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color:#6F6968;
+}
+.container {
+    padding: 50px;
+    background-color: white;
+    width:300px;
+    margin:80px;
+}
+
+input[type=text], input[type=password] {
+  width: 300px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus {
+  outline: none;
+}
+ div {
+            padding: 10px 0;
+         }
+.registerbtn ,.register{
+
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 125px;
+  opacity: 0.9;
+}
+.registerbtn:hover,.register {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+    <form method="post" action="register">
+        {% csrf_token %}
+        <center>
+             <div class="container">
+              <h2>Register Here</h2>
+            <input type="text" name="username" placeholder= "Email or Username" size="15" required /><br>
+            <input type="password" name="password" placeholder="Password" size="15" required /><br>
+            <input type="password" name="cpassword" placeholder="Confirm Password" size="15"required /><br>
+            <input type="reset" class="register" value="Reset" style="background-color:#A09FA0">
+            <input type="submit" class="registerbtn" value="Register" style="background-color:#4CAF50"><br>
+            <p>Already Registered? please</p><a href="{% url 'credentials:login' %}"> Sign in</a>
+
+        </div>
+        </center>
+
+{% for msg in messages %}
+  <h3> {{msg}}</h3>
+{% endfor %}
+
+    </form>
+
+</body>
+</html>

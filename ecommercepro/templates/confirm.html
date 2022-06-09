@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Confirm Order</title>
+<style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color:#6F6968;
+}
+.container {
+    padding: 50px;
+    background-color: white;
+    width:500px;
+    margin:80px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 300px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
+  outline: none;
+}
+#select {
+  width: 300px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+#select{
+  outline: none;
+}
+ div {
+            padding: 10px 0;
+         }
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 125px;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+    <form method="post" action="{% url 'cart:cart_detail' %}">
+        {% csrf_token %}
+
+        <center>
+        <div class="container">
+            <h3>Please fill out this fields to Confirm your order</h3>
+            <input type="text" name="name" placeholder= "Name" size="15" required><br>
+
+            <input type="text" name="address" placeholder="Address" required><br>
+            <input type="text" name="phone_no" placeholder="Phone Number" size="15" required><br>
+            <input type="email" name="email" placeholder="enter a valid email id" required>
+            <label for="district" required>Choose a District:</label>
+             <select id="district" name="district">
+                    <optgroup label="Kasargod">
+
+                      <option value=”Cheruvathur”>Cheruvathur </option>
+                      <option value=”Kanhangad”>Kanhangad </option>
+                       <option value=”Nileswaram”>Nileswaram</option>
+                </optgroup>
+                <optgroup label="Kannur">
+                     <option value=”Payyannur”>Payyannur </option>
+                    <option value=”Thaliparamba”> Thaliparamba</option>
+                    <option value=”Caltex”> caltex</option>
+                </optgroup>
+                <optgroup label="Trissur">
+                     <option value=”Kuttur”> Kuttur</option>
+                     <option value=”Guruvayoor”> Guruvayoor</option>
+                     <option value=”Chalakkudi”> Chalakkudi</option>
+                </optgroup>
+                 <optgroup label="Palakkad">
+                     <option value=”Kuttur”> Pattambi</option>
+                     <option value=”Guruvayoor”> Ottappalm</option>
+                     <option value=”Chalakkudi”> Malambuzha</option>
+                </optgroup>
+                 <optgroup label="Eranakulam">
+                     <option value=”Kuttur”> Kochi</option>
+                     <option value=”Guruvayoor”> Angamali</option>
+                     <option value=”Chalakkudi”> Aluva</option>
+                </optgroup>
+                 <optgroup label="Trivantrum">
+                     <option value=”Kuttur”> Venganur</option>
+                     <option value=”Guruvayoor”> Vattiyurkavu</option>
+                     <option value=”Chalakkudi”> Uliyazhuthura</option>
+                </optgroup>
+
+             </select></br></br>
+
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Confirm</button><br><br>
+            <h4><a href="{% url 'cart:cart_detail' %}" style="color:black;">Back</a></h4>
+        </div>
+        </center>
+    </form>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" >
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+
+        </div>
+        <div class="modal-body" >
+          <h4>Ordered Successfully</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >OK</button>
+            <a href="/">Back to home</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<script type="text/javascript">
+    function myFunction()
+    {window.location.href={% url 'cart:cart_detail' %};
+    }
+</script>
+</body>
+</html>
